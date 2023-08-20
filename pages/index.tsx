@@ -1,8 +1,13 @@
 import Head from "next/head";
 import styles from "@styles/Home.module.css";
-import InputCard from "@components/InputCard/InputCard";
+import InputCard from "@components/InputCard";
+import { useAppSelector } from "@data/hooks";
+import { selectLoanDetails } from "@data/loanDetailsStore";
+import DisplayCards from "@components/DisplayCards";
 
 export default function Home() {
+    const loanDetails = useAppSelector(selectLoanDetails);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -11,7 +16,7 @@ export default function Home() {
 
             <main>
                 <h1 className={styles.title}>Mortgage Payment Calculator</h1>
-                <InputCard />
+                {loanDetails == null ? <InputCard /> : <DisplayCards />}
             </main>
 
             <footer>
