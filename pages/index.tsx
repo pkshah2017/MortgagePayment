@@ -1,5 +1,6 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "@styles/Home.module.css";
+import InputCard from "@components/InputCard/InputCard";
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
 
             <main>
                 <h1 className={styles.title}>Mortgage Payment Calculator</h1>
+                <InputCard />
             </main>
 
             <footer>

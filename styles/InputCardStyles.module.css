@@ -1,0 +1,28 @@
+.card {
+    padding: 0.8rem;
+    border: 0.2rem solid #000000;
+    border-radius: 1.6rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.inputRow {
+    padding: 0.2rem 0 0.2rem 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numericInput {
+    width: 100%;
+    max-width: 300px;
+}
+
+@media screen and (min-width: 600px) {
+    .inputRow {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
