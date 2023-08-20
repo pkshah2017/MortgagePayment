@@ -7,9 +7,9 @@ export default function DisplayCards() {
     return (
         <>
             <p>This is where Display Cards will go</p>
-            <p>Loan Total: {loanDetails.total}</p>
+            <p>Loan Principal: {loanDetails.principal}</p>
+            <p>Loan Intrest Rate: {loanDetails.intrestRate}</p>
             <p>Loan Length: {loanDetails.loanLength}</p>
-            <p>Loan Remainiing: {loanDetails.remaining}</p>
         </>
     );
 }
