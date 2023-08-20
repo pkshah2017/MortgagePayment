@@ -1,9 +1,9 @@
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 
 interface LoanDetails {
-    total: number;
+    principal: number;
+    intrestRate: number;
     loanLength: number;
-    remaining: number;
 }
 
 interface LoanDetailsState {
@@ -27,11 +27,12 @@ const loanDetailSlice = createSlice({
 export const { setLoadValues } = loanDetailSlice.actions;
 
 export const selectLoanDetails = (state: RootState) => state.loanDetails;
-export const selectLoanTotal = (state: RootState) => state.loanDetails.total;
-export const selectLoanLoanLength = (state: RootState) =>
+export const selectLoanPrincipal = (state: RootState) =>
+    state.loanDetails.principal;
+export const selectLoanIntrestRate = (state: RootState) =>
+    state.loanDetails.intrestRate;
+export const selectLoanLength = (state: RootState) =>
     state.loanDetails.loanLength;
-export const selectLoanRemaining = (state: RootState) =>
-    state.loanDetails.remaining;
 
 export const store = configureStore({
     reducer: loanDetailSlice.reducer,

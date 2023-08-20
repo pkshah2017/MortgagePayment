@@ -5,27 +5,28 @@ import { selectLoanDetails, setLoadValues } from "@data/loanDetailsStore";
 
 export default function InputCard() {
     const dispatch = useAppDispatch();
-    const count = useAppSelector(selectLoanDetails);
+    const loanDetails = useAppSelector(selectLoanDetails);
 
     const onSubmit = (event: FormEvent) => {
         event.preventDefault();
 
-        const total = (event.target as HTMLFormElement).total.value as number;
+        const principal = (event.target as HTMLFormElement).principal
+            .value as number;
+        const intrestRate = (event.target as HTMLFormElement).intrestRate
+            .value as number;
         const loanLength = (event.target as HTMLFormElement).loanLength
             .value as number;
-        const remaining = (event.target as HTMLFormElement).remaining
-            .value as number;
-        dispatch(setLoadValues({ total, loanLength, remaining }));
+        dispatch(setLoadValues({ principal, intrestRate, loanLength }));
     };
 
     return (
         <form onSubmit={onSubmit} className={styles.card}>
             <div className={styles.inputRow}>
-                <label htmlFor="total">Total Loan Amount </label>
+                <label htmlFor="principal">Principal Loan Amount </label>
                 <input
                     type="number"
-                    id="total"
-                    name="total"
+                    id="principal"
+                    name="principal"
                     min={0}
                     step={0.01}
                     placeholder="65000"
@@ -35,27 +36,28 @@ export default function InputCard() {
             </div>
 
             <div className={styles.inputRow}>
-                <label htmlFor="loanLength">Loan Length (in Months) </label>
+                <label htmlFor="intrestRate">Annual Intrest Rate </label>
                 <input
                     type="number"
-                    id="loanLength"
-                    name="loanLength"
+                    id="intrestRate"
+                    name="intrestRate"
                     min={0}
-                    placeholder="30"
+                    step={0.0001}
+                    placeholder="0.05"
                     required
                     className={styles.numericInput}
                 />
             </div>
 
             <div className={styles.inputRow}>
-                <label htmlFor="remaining">Principle Amount Remaining </label>
+                <label htmlFor="loanLength">Length of the Loan in Years </label>
                 <input
                     type="number"
-                    id="remaining"
-                    name="remaining"
+                    id="loanLength"
+                    name="loanLength"
                     min={0}
-                    step={0.01}
-                    placeholder="30000"
+                    step={1}
+                    placeholder="30"
                     required
                     className={styles.numericInput}
                 />
