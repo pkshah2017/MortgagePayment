@@ -1,8 +1,25 @@
 import styles from "@styles/InputCardStyles.module.css";
+import { FormEvent } from "react";
+import { useAppDispatch, useAppSelector } from "@data/hooks";
+import { selectLoanDetails, setLoadValues } from "@data/loanDetailsStore";
 
 export default function InputCard() {
+    const dispatch = useAppDispatch();
+    const count = useAppSelector(selectLoanDetails);
+
+    const onSubmit = (event: FormEvent) => {
+        event.preventDefault();
+
+        const total = (event.target as HTMLFormElement).total.value as number;
+        const loanLength = (event.target as HTMLFormElement).loanLength
+            .value as number;
+        const remaining = (event.target as HTMLFormElement).remaining
+            .value as number;
+        dispatch(setLoadValues({ total, loanLength, remaining }));
+    };
+
     return (
-        <form onSubmit={() => {}} className={styles.card}>
+        <form onSubmit={onSubmit} className={styles.card}>
             <div className={styles.inputRow}>
                 <label htmlFor="total">Total Loan Amount </label>
                 <input
@@ -18,11 +35,11 @@ export default function InputCard() {
             </div>
 
             <div className={styles.inputRow}>
-                <label htmlFor="length">Loan Length (in Months) </label>
+                <label htmlFor="loanLength">Loan Length (in Months) </label>
                 <input
                     type="number"
-                    id="length"
-                    name="length"
+                    id="loanLength"
+                    name="loanLength"
                     min={0}
                     placeholder="30"
                     required
