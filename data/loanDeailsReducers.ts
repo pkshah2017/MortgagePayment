@@ -2,7 +2,7 @@ import type { MathType } from "mathjs";
 import type { MonthlyPaymentDetails } from "@data/loanDetailsStore";
 
 import { PayloadAction } from "@reduxjs/toolkit";
-import { bignumber, chain, format } from "mathjs";
+import { bignumber, chain } from "mathjs";
 
 interface SetLoadValuesActionPayload {
     principal: number;
@@ -58,21 +58,12 @@ const calculatePaymentPlan = (
             .done();
         loanPaymentPlan.push({
             paymentNumber: i,
-            intrestAmountPaid: Number(
-                format(intrestAmountPaid, { notation: "fixed", precision: 7 })
-            ),
-            principalAmountPaid: Number(
-                format(principalAmountPaid, { notation: "fixed", precision: 7 })
-            ),
+            intrestAmountPaid: Number(Number(intrestAmountPaid).toFixed(2)),
+            principalAmountPaid: Number(Number(principalAmountPaid).toFixed(2)),
             principalAmountRemaining: Number(
-                format(principalAmountRemaining, {
-                    notation: "fixed",
-                    precision: 7,
-                })
+                Number(principalAmountRemaining).toFixed(2)
             ),
-            totalMonthlyPayment: Number(
-                format(monthlyPayment, { notation: "fixed", precision: 7 })
-            ),
+            totalMonthlyPayment: Number(Number(monthlyPayment).toFixed(2)),
         });
     }
     return loanPaymentPlan;

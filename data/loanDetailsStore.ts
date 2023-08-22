@@ -1,6 +1,4 @@
-import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
-import Dinero from "dinero.js";
-import { bignumber, chain } from "mathjs";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 import { setLoadValuesReducer } from "@data/loanDeailsReducers";
 
 export interface MonthlyPaymentDetails {
