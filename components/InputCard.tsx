@@ -3,30 +3,34 @@ import { FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "@data/hooks";
 import { selectLoanDetails, setLoadValues } from "@data/loanDetailsStore";
 
+export const PRINCIPAL_INPUT_NAME = "principal";
+export const INTREST_RATE_INPUT_NAME = "intrest-rate";
+export const LOAN_LENGTH_INPUT_NAME = "loan-length";
+
 export default function InputCard() {
     const dispatch = useAppDispatch();
     const loanDetails = useAppSelector(selectLoanDetails);
 
     const onSubmit = (event: FormEvent) => {
         event.preventDefault();
+        const data = new FormData(event.target as HTMLFormElement);
 
-        const principal = (event.target as HTMLFormElement).principal
-            .value as number;
-        const intrestRate = (event.target as HTMLFormElement).intrestRate
-            .value as number;
-        const loanLength = (event.target as HTMLFormElement).loanLength
-            .value as number;
+        const principal = Number(data.get(PRINCIPAL_INPUT_NAME));
+        const intrestRate = Number(data.get(INTREST_RATE_INPUT_NAME));
+        const loanLength = Number(data.get(LOAN_LENGTH_INPUT_NAME));
         dispatch(setLoadValues({ principal, intrestRate, loanLength }));
     };
 
     return (
-        <form onSubmit={onSubmit} className={styles.card}>
+        <form onSubmit={onSubmit} className={styles.card} id="input-card">
             <div className={styles.inputRow}>
-                <label htmlFor="principal">Principal Loan Amount </label>
+                <label htmlFor={PRINCIPAL_INPUT_NAME}>
+                    Principal Loan Amount{" "}
+                </label>
                 <input
                     type="number"
-                    id="principal"
-                    name="principal"
+                    id={PRINCIPAL_INPUT_NAME}
+                    name={PRINCIPAL_INPUT_NAME}
                     min={0}
                     step={0.01}
                     placeholder="65000"
@@ -36,11 +40,13 @@ export default function InputCard() {
             </div>
 
             <div className={styles.inputRow}>
-                <label htmlFor="intrestRate">Annual Intrest Rate </label>
+                <label htmlFor={INTREST_RATE_INPUT_NAME}>
+                    Annual Intrest Rate{" "}
+                </label>
                 <input
                     type="number"
-                    id="intrestRate"
-                    name="intrestRate"
+                    id={INTREST_RATE_INPUT_NAME}
+                    name={INTREST_RATE_INPUT_NAME}
                     min={0}
                     step={0.0001}
                     placeholder="0.05"
@@ -50,11 +56,13 @@ export default function InputCard() {
             </div>
 
             <div className={styles.inputRow}>
-                <label htmlFor="loanLength">Length of the Loan in Years </label>
+                <label htmlFor={LOAN_LENGTH_INPUT_NAME}>
+                    Length of the Loan in Years
+                </label>
                 <input
                     type="number"
-                    id="loanLength"
-                    name="loanLength"
+                    id={LOAN_LENGTH_INPUT_NAME}
+                    name={LOAN_LENGTH_INPUT_NAME}
                     min={0}
                     step={1}
                     placeholder="30"
@@ -63,7 +71,9 @@ export default function InputCard() {
                 />
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit" id="input-card-submit">
+                Submit
+            </button>
         </form>
     );
 }
