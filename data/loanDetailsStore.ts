@@ -1,9 +1,22 @@
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
+import Dinero from "dinero.js";
+import { bignumber, chain } from "mathjs";
+import { setLoadValuesReducer } from "@data/loanDeailsReducers";
+
+export interface MonthlyPaymentDetails {
+    paymentNumber: number;
+    totalMonthlyPayment: number;
+    principalAmountPaid: number;
+    intrestAmountPaid: number;
+    principalAmountRemaining: number;
+}
 
 interface LoanDetails {
     principal: number;
     intrestRate: number;
     loanLength: number;
+    monthlyPayment: number;
+    loanPaymentPlan: MonthlyPaymentDetails[];
 }
 
 interface LoanDetailsState {
@@ -18,9 +31,7 @@ const loanDetailSlice = createSlice({
     name: "loanDetailSlice",
     initialState: initialState,
     reducers: {
-        setLoadValues: (state, action: PayloadAction<LoanDetails>) => {
-            return { loanDetails: action.payload };
-        },
+        setLoadValues: setLoadValuesReducer,
     },
 });
 
