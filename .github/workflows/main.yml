@@ -64,7 +64,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           build: npm run build
-          start: npm start
+          start: npx serve@latest out
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
