@@ -60,8 +60,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: E2E Testing
-        run: npm run e2e:headless
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
