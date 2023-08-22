@@ -16,6 +16,8 @@ import {
 import { Line } from "react-chartjs-2";
 import { useMemo } from "react";
 
+export const LOAN_PAYMENT_CHART_ID = "loan-payment-chart";
+
 const chartOptions = {
     responsive: true,
     plugins: {
@@ -82,7 +84,11 @@ export default function LoanPaymentChart() {
 
     return (
         <Card sx={{ minWidth: 750 }}>
-            <Line options={chartOptions} data={chartData} />
+            <Line
+                id={LOAN_PAYMENT_CHART_ID}
+                options={chartOptions}
+                data={chartData}
+            />
         </Card>
     );
 }

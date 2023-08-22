@@ -9,6 +9,8 @@ import {
 } from "@mui/x-data-grid";
 import Card from "@mui/material/Card";
 
+export const LOAN_PAYMENT_TABLE_ID = "loan-payment-table";
+
 function formatMoney(columnValue: GridValueFormatterParams<number>): string {
     const moneyValue = columnValue.value;
     if (moneyValue == null) {
@@ -61,7 +63,7 @@ export default function LoanPaymentTable() {
     const loanDetails = useAppSelector(selectLoanDetails);
 
     return (
-        <Card sx={{ minWidth: 750 }}>
+        <Card sx={{ minWidth: 750 }} id={LOAN_PAYMENT_TABLE_ID}>
             <DataGrid
                 rows={loanDetails.loanPaymentPlan}
                 columns={columns}
